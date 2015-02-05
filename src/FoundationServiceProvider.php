@@ -10,7 +10,7 @@ class FoundationServiceProvider {
     {
 
     }
-    
+
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -24,5 +24,15 @@ class FoundationServiceProvider {
             'foundation.presenter',
             'Foundation\Pagination\FoundationPresenter'
         );
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return ['Foundation\Pagination\FoundationPresenter'];
     }
 }
