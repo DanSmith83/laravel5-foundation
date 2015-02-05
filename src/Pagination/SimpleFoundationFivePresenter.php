@@ -3,7 +3,7 @@
 use Illuminate\Pagination\BootstrapThreePresenter;
 use Illuminate\Contracts\Pagination\Paginator as PaginatorContract;
 
-class SimpleFoundationPresenter extends BootstrapThreePresenter {
+class SimpleFoundationFivePresenter extends BootstrapThreePresenter {
 
     /**
      * Create a simple Foundation presenter.

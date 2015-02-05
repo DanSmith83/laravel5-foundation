@@ -2,7 +2,7 @@
 
 use Illuminate\Pagination\BootstrapThreePresenter;
 
-class FoundationPresenter extends BootstrapThreePresenter {
+class FoundationFivePresenter extends BootstrapThreePresenter {
 
     /**
      * Get HTML wrapper for disabled text.

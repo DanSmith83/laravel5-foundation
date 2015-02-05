@@ -2,18 +2,18 @@
 
 namespace Foundation\Pagination;
 
-use Foundation\Pagination\FoundationPresenter;
-use Foundation\Pagination\SimpleFoundationPresenter;
+use Foundation\Pagination\FoundationFivePresenter;
+use Foundation\Pagination\SimpleFoundationFivePresenter;
 
 class Factory {
 
     public function paginate($records)
     {
-        return new FoundationPresenter($records);
+        return new FoundationFivePresenter($records);
     }
 
     public function simplePaginate($records)
     {
-        return new SimpleFoundationPresenter($records);
+        return new SimpleFoundationFivePresenter($records);
     }
 }
