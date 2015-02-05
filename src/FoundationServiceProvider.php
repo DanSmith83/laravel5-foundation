@@ -21,7 +21,7 @@ class FoundationServiceProvider extends ServiceProvider {
     public function register()
     {
         $this->app->bind(
-            'foundation.presenter',
+            'Foundation',
             'Foundation\Pagination\Factory'
         );
     }

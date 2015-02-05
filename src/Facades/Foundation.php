@@ -8,6 +8,6 @@ class Foundation extends Facade {
 
     protected static function getFacadeAccessor()
     {
-        return 'foundation';
+        return 'Foundation';
     }
 }
