@@ -57,12 +57,7 @@ class SimpleFoundationPresenter extends BootstrapThreePresenter {
      */
     protected function getPageLinkWrapper($url, $page, $rel = null)
     {
-        if ($page == $this->paginator->currentPage())
-        {
-            return $this->getActivePageWrapper($page);
-        }
-
-        if ($page < $this->paginator->currentPage())
+        if ($page == '&laquo;')
         {
             return $this->getPreviousPageWrapper($url, $page, $rel);
         }
