@@ -4,7 +4,7 @@ namespace Foundation;
 
 use Illuminate\Support\ServiceProvider;
 
-class FoundationServiceProvider {
+class FoundationServiceProvider extends ServiceProvider {
 
     public function boot()
     {
