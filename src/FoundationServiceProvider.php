@@ -6,11 +6,6 @@ use Illuminate\Support\ServiceProvider;
 
 class FoundationServiceProvider extends ServiceProvider {
 
-    public function boot()
-    {
-
-    }
-
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -20,10 +15,7 @@ class FoundationServiceProvider extends ServiceProvider {
 
     public function register()
     {
-        $this->app->bind(
-            'Foundation',
-            'Foundation\Pagination\Factory'
-        );
+        $this->app->bind('foundation', '\Foundation\Pagination\Factory');
     }
 
     /**
@@ -33,6 +25,6 @@ class FoundationServiceProvider extends ServiceProvider {
      */
     public function provides()
     {
-        return ['Foundation\Pagination\Factory'];
+        return array('foundation');
     }
 }
