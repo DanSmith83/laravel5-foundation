@@ -46,4 +46,57 @@ class SimpleFoundationPresenter extends BootstrapThreePresenter {
 
         return '';
     }
+
+    /**
+     * Get HTML wrapper for a page link.
+     *
+     * @param  string  $url
+     * @param  int  $page
+     * @param  string|null  $rel
+     * @return string
+     */
+    protected function getPageLinkWrapper($url, $page, $rel = null)
+    {
+        if ($page == $this->paginator->currentPage())
+        {
+            return $this->getActivePageWrapper($page);
+        }
+
+        if ($page < $this->paginator->currentPage())
+        {
+            return $this->getPreviousPageWrapper($url, $page, $rel);
+        }
+
+        return $this->getNextPageWrapper($url, $page, $rel);
+    }
+
+    /**
+     * Get HTML wrapper for an available page link.
+     *
+     * @param  string  $url
+     * @param  int  $page
+     * @param  string|null  $rel
+     * @return string
+     */
+    protected function getPreviousPageWrapper($url, $page, $rel = null)
+    {
+        $rel = is_null($rel) ? '' : ' rel="'.$rel.'"';
+
+        return '<li class="left"><a href="'.$url.'"'.$rel.'>'.$page.'</a></li>';
+    }
+
+    /**
+     * Get HTML wrapper for an available page link.
+     *
+     * @param  string  $url
+     * @param  int  $page
+     * @param  string|null  $rel
+     * @return string
+     */
+    protected function getNextPageWrapper($url, $page, $rel = null)
+    {
+        $rel = is_null($rel) ? '' : ' rel="'.$rel.'"';
+
+        return '<li class="right"><a href="'.$url.'"'.$rel.'>'.$page.'</a></li>';
+    }
 }
