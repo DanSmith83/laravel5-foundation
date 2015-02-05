@@ -14,17 +14,7 @@ class SimpleFoundationPresenter extends BootstrapThreePresenter {
     {
         return '<li class="arrow unavailable"><a href="#">'.$text.'</a></li>';
     }
-
-    /**
-     * Get HTML wrapper for active text.
-     *
-     * @param  string  $text
-     * @return string
-     */
-    protected function getActivePageWrapper($text)
-    {
-        return '<li class="current"><a href="">'.$text.'</a></li>';
-    }
+    
 
     /**
      * Convert the URL window into Bootstrap HTML.
