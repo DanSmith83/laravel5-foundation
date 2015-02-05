@@ -3,11 +3,17 @@
 namespace Foundation\Pagination;
 
 use Foundation\Pagination\FoundationPresenter;
+use Foundation\Pagination\SimpleFoundationPresenter;
 
 class Factory {
 
-    function paginate($records)
+    public function paginate($records)
     {
         return new FoundationPresenter($records);
+    }
+
+    public function simplePaginate($records)
+    {
+        return new SimpleFoundationPresenter($records);
     }
 }
