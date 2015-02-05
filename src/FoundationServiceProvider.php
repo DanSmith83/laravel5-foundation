@@ -6,6 +6,11 @@ use Illuminate\Support\ServiceProvider;
 
 class FoundationServiceProvider {
 
+    public function boot()
+    {
+
+    }
+    
     /**
      * Indicates if loading of the provider is deferred.
      *
