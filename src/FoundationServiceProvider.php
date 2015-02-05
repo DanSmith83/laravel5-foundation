@@ -22,7 +22,7 @@ class FoundationServiceProvider extends ServiceProvider {
     {
         $this->app->bind(
             'foundation.presenter',
-            'Foundation\Pagination\FoundationPresenter'
+            'Foundation\Pagination\Factory'
         );
     }
 
@@ -33,6 +33,6 @@ class FoundationServiceProvider extends ServiceProvider {
      */
     public function provides()
     {
-        return ['Foundation\Pagination\FoundationPresenter'];
+        return ['Foundation\Pagination\Factory'];
     }
 }
