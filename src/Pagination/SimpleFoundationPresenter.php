@@ -5,6 +5,17 @@ use Illuminate\Pagination\BootstrapThreePresenter;
 class SimpleFoundationPresenter extends BootstrapThreePresenter {
 
     /**
+     * Create a simple Foundation presenter.
+     *
+     * @param  \Illuminate\Contracts\Pagination\Paginator  $paginator
+     * @return void
+     */
+    public function __construct(PaginatorContract $paginator)
+    {
+        $this->paginator = $paginator;
+    }
+
+    /**
      * Get HTML wrapper for disabled text.
      *
      * @param  string  $text
@@ -14,7 +25,7 @@ class SimpleFoundationPresenter extends BootstrapThreePresenter {
     {
         return '<li class="arrow unavailable"><a href="#">'.$text.'</a></li>';
     }
-    
+
 
     /**
      * Convert the URL window into Bootstrap HTML.
