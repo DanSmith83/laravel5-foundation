@@ -12,7 +12,7 @@ class FoundationPresenter extends BootstrapThreePresenter {
      */
     protected function getDisabledTextWrapper($text)
     {
-        return '<li class="arrow unavailable"><a href="#">'.$text.'</a></li>';
+        return '<li class="arrow unavailable" aria-disabled="true"><a href="#">'.$text.'</a></li>';
     }
 
     /**
@@ -23,6 +23,26 @@ class FoundationPresenter extends BootstrapThreePresenter {
      */
     protected function getActivePageWrapper($text)
     {
-        return '<li class="current"><a href="">'.$text.'</a></li>';
+        return '<li class="current"><a>'.$text.'</a></li>';
+    }
+
+    /**
+     * Convert the URL window into Bootstrap HTML.
+     *
+     * @return string
+     */
+    public function render()
+    {
+        if ($this->hasPages())
+        {
+            return sprintf(
+                '<ul class="pagination" aria-label="Pagination">%s %s %s</ul>',
+                $this->getPreviousButton(),
+                $this->getLinks(),
+                $this->getNextButton()
+            );
+        }
+
+        return '';
     }
 }
