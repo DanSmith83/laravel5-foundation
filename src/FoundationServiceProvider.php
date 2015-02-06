@@ -15,7 +15,7 @@ class FoundationServiceProvider extends ServiceProvider {
 
     public function register()
     {
-        $this->app->bind('foundation', '\Foundation\Pagination\Factory');
+        $this->app->bind('foundation.pagination', '\Foundation\Pagination\Factory');
     }
 
     /**
@@ -25,6 +25,8 @@ class FoundationServiceProvider extends ServiceProvider {
      */
     public function provides()
     {
-        return array('foundation');
+        return [
+            'foundation.pagination'
+        ];
     }
 }
