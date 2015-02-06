@@ -16,7 +16,7 @@ class FoundationFiveFormBuilder extends FormBuilder {
      */
     public function foundationText($name, $value = null, $options = array())
     {
-        return $this->startLabel($name).
+        return $this->startLabel($name, $name, $options).
                $this->input('text', $name, $value, $options).
                $this->endLabel();
     }
@@ -37,7 +37,7 @@ class FoundationFiveFormBuilder extends FormBuilder {
 
         $value = e($this->formatLabel($name, $value));
 
-        return '<label for="'.$name.'"'.$options.'>'.$value;
+        return '<label'.$options.'>'.$value;
     }
 
     public function endLabel()
