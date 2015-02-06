@@ -1,6 +1,6 @@
 <?php
 
-namespace Foundation\Pagination;
+namespace Foundation;
 
 use Foundation\Pagination\FoundationFivePresenter;
 use Foundation\Pagination\SimpleFoundationFivePresenter;
