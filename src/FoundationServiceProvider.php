@@ -2,7 +2,6 @@
 
 namespace Foundation;
 
-use Foundation\Form\FoundationFiveFormBuilder;
 use Illuminate\Support\ServiceProvider;
 
 class FoundationServiceProvider extends ServiceProvider {
@@ -16,24 +15,7 @@ class FoundationServiceProvider extends ServiceProvider {
 
     public function register()
     {
-        $this->registerFormBuilder();
-
-        $this->app->bind('foundation', '\Foundation\Factory');
-    }
-
-    /**
-     * Register the form builder instance.
-     *
-     * @return void
-     */
-    protected function registerFormBuilder()
-    {
-        $this->app->bindShared('form', function($app)
-        {
-            $form = new FoundationFiveFormBuilder($app['html'], $app['url'], $app['session.store']->getToken());
-
-            return $form->setSessionStore($app['session.store']);
-        });
+        $this->app->bind('foundation', 'Foundation\Factory');
     }
 
     /**
