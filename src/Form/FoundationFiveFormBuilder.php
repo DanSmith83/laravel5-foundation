@@ -6,7 +6,7 @@ use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Html\FormBuilder;
 use Illuminate\Html\HtmlBuilder;
 use Illuminate\Session\Store;
-use Illuminate\Support\MessageBag;
+use Illuminate\Support\ViewErrorBag;
 
 class FoundationFiveFormBuilder extends FormBuilder {
 
@@ -17,16 +17,11 @@ class FoundationFiveFormBuilder extends FormBuilder {
      * @param string $csrfToken
      * @param Store $session
      */
-    public function __construct(HtmlBuilder $html, UrlGenerator $url, Store $session)
+    public function __construct(HtmlBuilder $html, UrlGenerator $url, $csrfToken, ViewErrorBag $errors)
     {
-        parent::__construct($html, $url, $session->getToken());
+        parent::__construct($html, $url, $csrfToken);
 
-        $this->errors = new MessageBag;
-
-        if ($errors = $session->has('errors'))
-        {
-            $this->errors = $session->get('errors');
-        }
+        $this->errors = $errors;
     }
 
     /**

@@ -4,6 +4,7 @@ namespace Foundation;
 
 use Foundation\Form\FoundationFiveFormBuilder;
 use Illuminate\Html\HtmlServiceProvider;
+use Illuminate\Support\ViewErrorBag;
 
 class FoundationServiceProvider extends HtmlServiceProvider {
 
@@ -33,7 +34,8 @@ class FoundationServiceProvider extends HtmlServiceProvider {
             $form = new FoundationFiveFormBuilder(
                 $app['html'],
                 $app['url'],
-                $app['session.store']
+                $app['session.store']->getToken(),
+                $app['session.store']->get('errors') ?: new ViewErrorBag
             );
 
             return $form->setSessionStore($app['session.store']);
