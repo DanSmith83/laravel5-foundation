@@ -6,6 +6,7 @@ use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Html\FormBuilder;
 use Illuminate\Html\HtmlBuilder;
 use Illuminate\Session\Store;
+use Illuminate\Support\MessageBag;
 
 class FoundationFiveFormBuilder extends FormBuilder {
 
@@ -20,7 +21,7 @@ class FoundationFiveFormBuilder extends FormBuilder {
     {
         parent::__construct($html, $url, $session->getToken());
 
-        $this->errors = [];
+        $this->errors = new MessageBag;
 
         if ($errors = $session->has('errors'))
         {
@@ -104,11 +105,6 @@ class FoundationFiveFormBuilder extends FormBuilder {
      */
     private function appendErrors($name, $options)
     {
-        if (empty($this->errors))
-        {
-            return $options;
-        }
-
         if ($this->errors->has($name))
         {
             $options['class'] = isset($options['class']) ? $options['class'].' error' : 'error';
