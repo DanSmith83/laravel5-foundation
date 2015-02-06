@@ -1,5 +1,7 @@
 <?php
 
+namespace Foundation\Form;
+
 use Illuminate\Html\FormBuilder;
 
 class FoundationFiveFormBuilder extends FormBuilder {

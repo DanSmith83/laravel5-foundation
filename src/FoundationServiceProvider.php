@@ -2,6 +2,7 @@
 
 namespace Foundation;
 
+use Foundation\Form\FoundationFiveFormBuilder;
 use Illuminate\Html\HtmlServiceProvider;
 
 class FoundationServiceProvider extends HtmlServiceProvider {
