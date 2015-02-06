@@ -18,7 +18,7 @@ class FoundationServiceProvider extends ServiceProvider {
     {
         $this->registerFormBuilder();
 
-        $this->app->bind('foundation', '\Foundation\Pagination\Factory');
+        $this->app->bind('foundation', '\Foundation\Factory');
     }
 
     /**
