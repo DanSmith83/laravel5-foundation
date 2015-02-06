@@ -30,7 +30,11 @@ class FoundationServiceProvider extends HtmlServiceProvider {
     {
         $this->app->bindShared('form', function($app)
         {
-            $form = new FoundationFiveFormBuilder($app['html'], $app['url'], $app['session.store']->getToken());
+            $form = new FoundationFiveFormBuilder(
+                $app['html'],
+                $app['url'],
+                $app['session.store']
+            );
 
             return $form->setSessionStore($app['session.store']);
         });

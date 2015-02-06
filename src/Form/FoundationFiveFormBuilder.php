@@ -2,46 +2,118 @@
 
 namespace Foundation\Form;
 
+use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Html\FormBuilder;
+use Illuminate\Html\HtmlBuilder;
+use Illuminate\Session\Store;
 
 class FoundationFiveFormBuilder extends FormBuilder {
 
+
     /**
-     * Create a text input field.
-     *
-     * @param  string  $name
-     * @param  string  $value
-     * @param  array   $options
-     * @return string
+     * @param HtmlBuilder $html
+     * @param UrlGenerator $url
+     * @param string $csrfToken
+     * @param Store $session
      */
-    public function foundationText($name, $value = null, $options = array())
+    public function __construct(HtmlBuilder $html, UrlGenerator $url, Store $session)
     {
-        return $this->startLabel($name, $name, $options).
-               $this->input('text', $name, $value, $options).
-               $this->endLabel();
+        parent::__construct($html, $url, $session->getToken());
+
+        $this->errors = [];
+
+        if ($errors = $session->has('errors'))
+        {
+            $this->errors = $session->get('errors');
+        }
     }
 
     /**
-     * Create a form label element.
-     *
-     * @param  string  $name
-     * @param  string  $value
-     * @param  array   $options
+     * @param $name
+     * @param $labelText
+     * @param null $value
+     * @param array $options
      * @return string
      */
-    public function startLabel($name, $value = null, $options = array())
+    public function foundationText($name, $labelText, $value = null, $options = array())
     {
-        $this->labels[] = $name;
+        return $this->wrapWithLabel(
+            $name,
+            $labelText,
+            $options,
+            parent::text($name, $value, $this->appendErrors($name, $options))
+        );
+    }
+
+    /**
+     * @param $name
+     * @param $labelText
+     * @param array $list
+     * @param null $selected
+     * @param array $options
+     * @return string
+     */
+    public function foundationSelect($name, $labelText, $list = array(), $selected = null, $options = array())
+    {
+        return $this->wrapWithLabel(
+            $name,
+            $labelText,
+            $options,
+            parent::select($name, $list, $selected, $this->appendErrors($name, $options))
+        );
+    }
+
+    /**
+     * @param $value
+     * @param array $options
+     * @return string
+     */
+    private function startLabel($value, $options = array())
+    {
+        $this->labels[] = $value;
 
         $options = $this->html->attributes($options);
-
-        $value = e($this->formatLabel($name, $value));
 
         return '<label'.$options.'>'.$value;
     }
 
-    public function endLabel()
+    /**
+     * @return string
+     */
+    private function endLabel()
     {
         return '</label>';
+    }
+
+    /**
+     * @param $name
+     * @param $labelText
+     * @param $options
+     * @param $html
+     * @return string
+     */
+    private function wrapWithLabel($name, $labelText, $options, $html)
+    {
+        return $this->startLabel($labelText, $this->appendErrors($name, $options)).$html.$this->endLabel();
+    }
+
+    /**
+     * @param $name
+     * @param $options
+     * @return mixed
+     */
+    private function appendErrors($name, $options)
+    {
+        if (empty($this->errors))
+        {
+            return $options;
+        }
+
+        if ($this->errors->has($name))
+        {
+            $options['class'] = isset($options['class']) ? $options['class'].' error' : 'error';
+        }
+
+        return $options;
     }
 }
