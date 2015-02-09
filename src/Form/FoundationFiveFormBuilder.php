@@ -60,6 +60,24 @@ class FoundationFiveFormBuilder extends FormBuilder {
     }
 
     /**
+     * @param $name
+     * @param $labelText
+     * @param null $value
+     * @param null $checked
+     * @param array $options
+     * @return string
+     */
+    public function foundationRadio($name, $labelText, $value = null, $checked = null, $options = array())
+    {
+        return $this->wrapWithLabel(
+            $name,
+            $labelText,
+            $options,
+            parent::radio($name, $value, $checked, $options)
+        );
+    }
+
+    /**
      * @param $value
      * @param array $options
      * @return string
