@@ -175,6 +175,13 @@ class FoundationFiveFormBuilder extends FormBuilder {
      */
     private function wrapWithLabel($name, $labelText, $options, $html)
     {
+        if ($this->errors->has($name))
+        {
+            return $this->startLabel($labelText, $this->appendErrors($name, $options)).
+                   $html.$this->endLabel().
+                   $this->smallError($name);
+        }
+
         return $this->startLabel($labelText, $this->appendErrors($name, $options)).$html.$this->endLabel();
     }
 
@@ -191,5 +198,14 @@ class FoundationFiveFormBuilder extends FormBuilder {
         }
 
         return $options;
+    }
+
+    /**
+     * @param $name
+     * @return string
+     */
+    private function smallError($name)
+    {
+        return sprintf('<small class="error">%s</small>', $this->errors->first($name));
     }
 }
