@@ -44,6 +44,39 @@ class FoundationFiveFormBuilder extends FormBuilder {
     /**
      * @param $name
      * @param $labelText
+     * @param null $value
+     * @param array $options
+     * @return string
+     */
+    public function foundationTextarea($name, $labelText, $value = null, $options = array())
+    {
+        return $this->wrapWithLabel(
+            $name,
+            $labelText,
+            $options,
+            parent::textarea($name, $value, $this->appendErrors($name, $options))
+        );
+    }
+
+    /**
+     * @param $name
+     * @param $labelText
+     * @param array $options
+     * @return string
+     */
+    public function foundationPassword($name, $labelText, $options = array())
+    {
+        return $this->wrapWithLabel(
+            $name,
+            $labelText,
+            $options,
+            parent::password($name, $labelText, $this->appendErrors($name, $options))
+        );
+    }
+
+    /**
+     * @param $name
+     * @param $labelText
      * @param array $list
      * @param null $selected
      * @param array $options
@@ -73,7 +106,7 @@ class FoundationFiveFormBuilder extends FormBuilder {
             $name,
             $labelText,
             $options,
-            parent::radio($name, $value, $checked, $options)
+            parent::radio($name, $value, $checked, $this->appendErrors($name, $options))
         );
     }
 
@@ -91,7 +124,7 @@ class FoundationFiveFormBuilder extends FormBuilder {
             $name,
             $labelText,
             $options,
-            parent::checkable('checkbox', $name, $value, $checked, $options)
+            parent::checkable('checkbox', $name, $value, $checked, $this->appendErrors($name, $options))
         );
     }
 
@@ -107,7 +140,7 @@ class FoundationFiveFormBuilder extends FormBuilder {
             $name,
             $labelText,
             $options,
-            $this->input('file', $name, null, $options)
+            $this->input('file', $name, null, $this->appendErrors($name, $options))
         );
     }
 
