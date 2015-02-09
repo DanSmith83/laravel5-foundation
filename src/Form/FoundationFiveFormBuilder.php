@@ -78,6 +78,40 @@ class FoundationFiveFormBuilder extends FormBuilder {
     }
 
     /**
+     * @param $name
+     * @param $labelText
+     * @param int $value
+     * @param null $checked
+     * @param array $options
+     * @return string
+     */
+    public function foundationCheckbox($name, $labelText, $value = 1, $checked = null, $options = array())
+    {
+        return $this->wrapWithLabel(
+            $name,
+            $labelText,
+            $options,
+            parent::checkable('checkbox', $name, $value, $checked, $options)
+        );
+    }
+
+    /**
+     * @param $name
+     * @param $labelText
+     * @param array $options
+     * @return string
+     */
+    public function foundationFile($name, $labelText, $options = array())
+    {
+        return $this->wrapWithLabel(
+            $name,
+            $labelText,
+            $options,
+            $this->input('file', $name, null, $options)
+        );
+    }
+
+    /**
      * @param $value
      * @param array $options
      * @return string
