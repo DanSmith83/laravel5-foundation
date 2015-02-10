@@ -145,6 +145,47 @@ class FoundationFiveFormBuilder extends FormBuilder {
     }
 
     /**
+     * @param $name
+     * @param $labelText
+     * @param $begin
+     * @param $end
+     * @param null $selected
+     * @param array $options
+     * @return string
+     */
+    public function foundationSelectRange($name, $labelText, $begin, $end, $selected = null, $options = array())
+    {
+        $range = array_combine($range = range($begin, $end), $range);
+
+        return $this->foundationSelect($name, $labelText, $range, $selected, $options);
+    }
+
+    public function foundationSelectYear()
+    {
+        return call_user_func_array(array($this, 'foundationSelectRange'), func_get_args());
+    }
+
+    /**
+     * @param $name
+     * @param $labelText
+     * @param null $selected
+     * @param array $options
+     * @param string $format
+     * @return string
+     */
+    public function foundationSelectMonth($name, $labelText, $selected = null, $options = array(), $format = '%B')
+    {
+        $months = array();
+
+        foreach (range(1, 12) as $month)
+        {
+            $months[$month] = strftime($format, mktime(0, 0, 0, $month, 1));
+        }
+
+        return $this->foundationSelect($name, $labelText, $months, $selected, $options);
+    }
+
+    /**
      * @param $value
      * @param array $options
      * @return string
