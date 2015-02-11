@@ -226,7 +226,7 @@ class FoundationFiveFormBuilder extends FormBuilder {
      */
     public function select($name, $list = array(), $selected = null, $options = array())
     {
-        return parent::select($name, $list, $selected, $this->appendErrors($options));
+        return parent::select($name, $list, $selected, $this->appendErrors($name, $options));
     }
 
     /**
