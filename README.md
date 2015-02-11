@@ -5,7 +5,9 @@ At the moment, this just adds Foundation style pagination. I may add more at a l
 
 ##Installation
 
-`$ composer require dansmith/laravel5-foundation`
+Add to composer.json:
+
+`"dansmith/laravel5-foundation": "0.1.*"`
 
 Add the service provider to the providers array in your config/app.php file:
 
