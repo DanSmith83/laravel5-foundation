@@ -31,7 +31,7 @@ class FoundationFiveFormBuilder extends FormBuilder {
      * @param array $options
      * @return string
      */
-    public function foundationText($name, $labelText, $value = null, $options = array())
+    public function wrappedText($name, $labelText, $value = null, $options = array())
     {
         return $this->wrapWithLabel(
             $name,
@@ -48,7 +48,7 @@ class FoundationFiveFormBuilder extends FormBuilder {
      * @param array $options
      * @return string
      */
-    public function foundationTextarea($name, $labelText, $value = null, $options = array())
+    public function wrappedTextarea($name, $labelText, $value = null, $options = array())
     {
         return $this->wrapWithLabel(
             $name,
@@ -64,7 +64,7 @@ class FoundationFiveFormBuilder extends FormBuilder {
      * @param array $options
      * @return string
      */
-    public function foundationPassword($name, $labelText, $options = array())
+    public function wrappedPassword($name, $labelText, $options = array())
     {
         return $this->wrapWithLabel(
             $name,
@@ -82,7 +82,7 @@ class FoundationFiveFormBuilder extends FormBuilder {
      * @param array $options
      * @return string
      */
-    public function foundationSelect($name, $labelText, $list = array(), $selected = null, $options = array())
+    public function wrappedSelect($name, $labelText, $list = array(), $selected = null, $options = array())
     {
         return $this->wrapWithLabel(
             $name,
@@ -100,7 +100,7 @@ class FoundationFiveFormBuilder extends FormBuilder {
      * @param array $options
      * @return string
      */
-    public function foundationRadio($name, $labelText, $value = null, $checked = null, $options = array())
+    public function wrappedRadio($name, $labelText, $value = null, $checked = null, $options = array())
     {
         return $this->wrapWithLabel(
             $name,
@@ -118,7 +118,7 @@ class FoundationFiveFormBuilder extends FormBuilder {
      * @param array $options
      * @return string
      */
-    public function foundationCheckbox($name, $labelText, $value = 1, $checked = null, $options = array())
+    public function wrappedCheckbox($name, $labelText, $value = 1, $checked = null, $options = array())
     {
         return $this->wrapWithLabel(
             $name,
@@ -134,7 +134,7 @@ class FoundationFiveFormBuilder extends FormBuilder {
      * @param array $options
      * @return string
      */
-    public function foundationFile($name, $labelText, $options = array())
+    public function wrappedFile($name, $labelText, $options = array())
     {
         return $this->wrapWithLabel(
             $name,
@@ -153,14 +153,17 @@ class FoundationFiveFormBuilder extends FormBuilder {
      * @param array $options
      * @return string
      */
-    public function foundationSelectRange($name, $labelText, $begin, $end, $selected = null, $options = array())
+    public function wrappedSelectRange($name, $labelText, $begin, $end, $selected = null, $options = array())
     {
         $range = array_combine($range = range($begin, $end), $range);
 
         return $this->foundationSelect($name, $labelText, $range, $selected, $options);
     }
 
-    public function foundationSelectYear()
+    /**
+     * @return mixed
+     */
+    public function wrappedSelectYear()
     {
         return call_user_func_array(array($this, 'foundationSelectRange'), func_get_args());
     }
@@ -173,7 +176,7 @@ class FoundationFiveFormBuilder extends FormBuilder {
      * @param string $format
      * @return string
      */
-    public function foundationSelectMonth($name, $labelText, $selected = null, $options = array(), $format = '%B')
+    public function wrappedSelectMonth($name, $labelText, $selected = null, $options = array(), $format = '%B')
     {
         $months = array();
 
@@ -183,6 +186,60 @@ class FoundationFiveFormBuilder extends FormBuilder {
         }
 
         return $this->foundationSelect($name, $labelText, $months, $selected, $options);
+    }
+
+    /**
+     * Create a form input field.
+     *
+     * @param  string  $type
+     * @param  string  $name
+     * @param  string  $value
+     * @param  array   $options
+     * @return string
+     */
+    public function input($type, $name, $value = null, $options = array())
+    {
+        return parent::input($type, $name, $value, $this->appendErrors($name, $options));
+    }
+
+    /**
+     * Create a textarea input field.
+     *
+     * @param  string  $name
+     * @param  string  $value
+     * @param  array   $options
+     * @return string
+     */
+    public function textarea($name, $value = null, $options = array())
+    {
+        return parent::textarea($name, $value, $this->appendErrors($name, $options));
+    }
+
+    /**
+     * Create a select box field.
+     *
+     * @param  string  $name
+     * @param  array   $list
+     * @param  string  $selected
+     * @param  array   $options
+     * @return string
+     */
+    public function select($name, $list = array(), $selected = null, $options = array())
+    {
+        return parent::select($name, $list, $selected, $this->appendErrors($options));
+    }
+
+    /**
+     * Create a form label element.
+     *
+     * @param  string  $name
+     * @param  string  $value
+     * @param  array   $options
+     * @return string
+     */
+    public function label($name, $value = null, $options = array())
+    {
+        return parent::label($name, $value, $this->appendErrors($name, $options));
     }
 
     /**
