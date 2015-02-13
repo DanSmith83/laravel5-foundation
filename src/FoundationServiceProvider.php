@@ -22,25 +22,6 @@ class FoundationServiceProvider extends HtmlServiceProvider {
         $this->app->bind('foundation', 'Foundation\Factory');
     }
 
-    /**
-     * Register the form builder instance.
-     *
-     * @return void
-     */
-    protected function registerFormBuilder()
-    {
-        $this->app->bindShared('form', function($app)
-        {
-            $form = new FoundationFiveFormBuilder(
-                $app['html'],
-                $app['url'],
-                $app['session.store']->getToken(),
-                $app['session.store']->get('errors') ?: new ViewErrorBag
-            );
-
-            return $form->setSessionStore($app['session.store']);
-        });
-    }
 
     /**
      * Get the services provided by the provider.
@@ -49,6 +30,6 @@ class FoundationServiceProvider extends HtmlServiceProvider {
      */
     public function provides()
     {
-        return ['foundation', 'html', 'form'];
+        return ['foundation'];
     }
 }
