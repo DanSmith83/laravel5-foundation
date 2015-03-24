@@ -3,8 +3,8 @@
 namespace Foundation\Form;
 
 use Illuminate\Contracts\Routing\UrlGenerator;
-use Illuminate\Html\FormBuilder;
-use Illuminate\Html\HtmlBuilder;
+use Collective\Html\FormBuilder;
+use Collective\Html\HtmlBuilder;
 use Illuminate\Session\Store;
 use Illuminate\Support\ViewErrorBag;
 
