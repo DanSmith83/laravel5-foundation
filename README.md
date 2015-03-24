@@ -12,12 +12,12 @@ Add to composer.json:
 
 This package comes with two service providers which should be added to the providers array in your config/app.php file:
 
-`'Foundation\FoundationServiceProvider',`
-`'Foundation\FoundationFormServiceProvider',`
+* `'Foundation\FoundationServiceProvider',`
+* `'Foundation\FoundationFormServiceProvider',`
 
-Optionally, add the facade class to the aliases array in the same file:
+Add the facade (Optional):
 
-`'Foundation' => 'Foundation\Facades\Foundation',`
+* `'Foundation' => 'Foundation\Facades\Foundation',`
 
 ## Pagination
 
@@ -50,6 +50,6 @@ The only difference being that the label text is now specified as the second par
 ```
 
 If there are any validation errors which match the name of the specified input, an error class will be applied to both
-the label and input elements and the first error found will be inserted into a small element.
+the label and input elements and the first error found will be inserted into a small element (See the [Foundation documentation](http://foundation.zurb.com/docs/components/forms.html) for examples)
 
 
