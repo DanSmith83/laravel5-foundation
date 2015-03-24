@@ -31,7 +31,7 @@ class FoundationFiveFormBuilder extends FormBuilder {
      * @param array $options
      * @return string
      */
-    public function wrappedText($name, $labelText, $value = null, $options = array())
+    public function wrappedText($name, $labelText, $value = null, $options = [])
     {
         return $this->wrapWithLabel(
             $name,
@@ -48,7 +48,7 @@ class FoundationFiveFormBuilder extends FormBuilder {
      * @param array $options
      * @return string
      */
-    public function wrappedTextarea($name, $labelText, $value = null, $options = array())
+    public function wrappedTextarea($name, $labelText, $value = null, $options = [])
     {
         return $this->wrapWithLabel(
             $name,
@@ -64,14 +64,16 @@ class FoundationFiveFormBuilder extends FormBuilder {
      * @param array $options
      * @return string
      */
-    public function wrappedPassword($name, $labelText, $options = array())
+    public function wrappedPassword($name, $labelText, $options = [])
     {
         return $this->wrapWithLabel(
             $name,
             $labelText,
             $options,
-            parent::password($name, $labelText, $this->appendErrors($name, $options))
+            $this->input('password', $name, '', $options)
         );
+
+
     }
 
     /**
@@ -82,7 +84,7 @@ class FoundationFiveFormBuilder extends FormBuilder {
      * @param array $options
      * @return string
      */
-    public function wrappedSelect($name, $labelText, $list = array(), $selected = null, $options = array())
+    public function wrappedSelect($name, $labelText, $list = [], $selected = null, $options = [])
     {
         return $this->wrapWithLabel(
             $name,
@@ -100,7 +102,7 @@ class FoundationFiveFormBuilder extends FormBuilder {
      * @param array $options
      * @return string
      */
-    public function wrappedRadio($name, $labelText, $value = null, $checked = null, $options = array())
+    public function wrappedRadio($name, $labelText, $value = null, $checked = null, $options = [])
     {
         return $this->wrapWithLabel(
             $name,
@@ -118,7 +120,7 @@ class FoundationFiveFormBuilder extends FormBuilder {
      * @param array $options
      * @return string
      */
-    public function wrappedCheckbox($name, $labelText, $value = 1, $checked = null, $options = array())
+    public function wrappedCheckbox($name, $labelText, $value = 1, $checked = null, $options = [])
     {
         return $this->wrapWithLabel(
             $name,
@@ -134,7 +136,7 @@ class FoundationFiveFormBuilder extends FormBuilder {
      * @param array $options
      * @return string
      */
-    public function wrappedFile($name, $labelText, $options = array())
+    public function wrappedFile($name, $labelText, $options = [])
     {
         return $this->wrapWithLabel(
             $name,
@@ -153,7 +155,7 @@ class FoundationFiveFormBuilder extends FormBuilder {
      * @param array $options
      * @return string
      */
-    public function wrappedSelectRange($name, $labelText, $begin, $end, $selected = null, $options = array())
+    public function wrappedSelectRange($name, $labelText, $begin, $end, $selected = null, $options = [])
     {
         $range = array_combine($range = range($begin, $end), $range);
 
@@ -176,9 +178,9 @@ class FoundationFiveFormBuilder extends FormBuilder {
      * @param string $format
      * @return string
      */
-    public function wrappedSelectMonth($name, $labelText, $selected = null, $options = array(), $format = '%B')
+    public function wrappedSelectMonth($name, $labelText, $selected = null, $options = [], $format = '%B')
     {
-        $months = array();
+        $months = [];
 
         foreach (range(1, 12) as $month)
         {
@@ -197,7 +199,7 @@ class FoundationFiveFormBuilder extends FormBuilder {
      * @param  array   $options
      * @return string
      */
-    public function input($type, $name, $value = null, $options = array())
+    public function input($type, $name, $value = null, $options = [])
     {
         return parent::input($type, $name, $value, $this->appendErrors($name, $options));
     }
@@ -210,7 +212,7 @@ class FoundationFiveFormBuilder extends FormBuilder {
      * @param  array   $options
      * @return string
      */
-    public function textarea($name, $value = null, $options = array())
+    public function textarea($name, $value = null, $options = [])
     {
         return parent::textarea($name, $value, $this->appendErrors($name, $options));
     }
@@ -224,7 +226,7 @@ class FoundationFiveFormBuilder extends FormBuilder {
      * @param  array   $options
      * @return string
      */
-    public function select($name, $list = array(), $selected = null, $options = array())
+    public function select($name, $list = [], $selected = null, $options = [])
     {
         return parent::select($name, $list, $selected, $this->appendErrors($name, $options));
     }
@@ -237,7 +239,7 @@ class FoundationFiveFormBuilder extends FormBuilder {
      * @param  array   $options
      * @return string
      */
-    public function label($name, $value = null, $options = array())
+    public function label($name, $value = null, $options = [])
     {
         return parent::label($name, $value, $this->appendErrors($name, $options));
     }
@@ -247,7 +249,7 @@ class FoundationFiveFormBuilder extends FormBuilder {
      * @param array $options
      * @return string
      */
-    private function startLabel($value, $options = array())
+    private function startLabel($value, $options = [])
     {
         $this->labels[] = $value;
 
@@ -273,6 +275,8 @@ class FoundationFiveFormBuilder extends FormBuilder {
      */
     private function wrapWithLabel($name, $labelText, $options, $html)
     {
+        $options = array_except($options, ['id']);
+
         if ($this->errors->has($name))
         {
             return $this->startLabel($labelText, $this->appendErrors($name, $options)).
