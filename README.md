@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/DanSmith83/laravel5-foundation.svg?branch=master)](https://travis-ci.org/DanSmith83/laravel5-foundation)
+
 # laravel5-foundation
 
 Create easy pagination and form elements based on the [Zurb Foundation](http://foundation.zurb.com) framework.

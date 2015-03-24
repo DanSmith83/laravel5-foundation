@@ -6,6 +6,7 @@ use Collective\Html\HtmlBuilder;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Routing\RouteCollection;
 use Illuminate\Support\ViewErrorBag;
+use Illuminate\Support\MessageBag;
 
 class FormBuilderTest extends PHPUnit_Framework_TestCase {
 
@@ -23,7 +24,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase {
 
     public function testWrappedText()
     {
-        $emptyInput          = $this->formBuilder->wrappedText('test', 'Test:', null);
+        $emptyInput          = $this->formBuilder->wrappedText('test', 'Test:');
         $filledInput         = $this->formBuilder->wrappedText('test', 'Test:', 'Testing');
         $inputWithAttributes = $this->formBuilder->wrappedText('test', 'Test:', 'Testing', $this->attributes);
 
@@ -37,7 +38,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase {
 
     public function testWrappedTextarea()
     {
-        $emptyInput          = $this->formBuilder->wrappedTextarea('test', 'Test:', null);
+        $emptyInput          = $this->formBuilder->wrappedTextarea('test', 'Test:');
         $filledInput         = $this->formBuilder->wrappedTextarea('test', 'Test:', 'Testing');
         $inputWithAttributes = $this->formBuilder->wrappedTextarea('test', 'Test:', 'Testing', $this->attributes);
 
@@ -148,5 +149,16 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase {
         $emptyInput = $this->formBuilder->wrappedFile('test', 'Test:');
 
         $this->assertEquals('<label>Test:<input name="test" type="file"></label>', $emptyInput);
+    }
+
+    public function testErrorDisplay()
+    {
+        $viewErrorBag = new ViewErrorBag;
+        $viewErrorBag->put('default', new MessageBag(['test' => ['Generic error message']]));
+
+        $formBuilder = new FoundationFiveFormBuilder($this->htmlBuilder, $this->urlGenerator, 'abc', $viewErrorBag);
+        $input       = $formBuilder->wrappedText('test', 'Test:');
+
+        $this->assertEquals('<label class="error">Test:<input class="error error" name="test" type="text"></label><small class="error">Generic error message</small>', $input);
     }
 }

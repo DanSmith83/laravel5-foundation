@@ -5,7 +5,6 @@ namespace Foundation\Form;
 use Illuminate\Contracts\Routing\UrlGenerator;
 use Collective\Html\FormBuilder;
 use Collective\Html\HtmlBuilder;
-use Illuminate\Session\Store;
 use Illuminate\Support\ViewErrorBag;
 
 class FoundationFiveFormBuilder extends FormBuilder {
@@ -15,7 +14,7 @@ class FoundationFiveFormBuilder extends FormBuilder {
      * @param HtmlBuilder $html
      * @param UrlGenerator $url
      * @param string $csrfToken
-     * @param Store $session
+     * @param ViewErrorBag $errors
      */
     public function __construct(HtmlBuilder $html, UrlGenerator $url, $csrfToken, ViewErrorBag $errors)
     {
