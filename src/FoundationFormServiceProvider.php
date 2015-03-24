@@ -4,7 +4,7 @@ namespace Foundation;
 
 use Foundation\Form\FoundationFiveFormBuilder;
 use Collective\Html\HtmlServiceProvider;
-use Collective\Support\ViewErrorBag;
+use Illuminate\Support\ViewErrorBag;
 
 class FoundationFormServiceProvider extends HtmlServiceProvider {
 
