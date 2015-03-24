@@ -1,17 +1,17 @@
 # laravel5-foundation
-Zurb Foundation components for Laravel 5
 
-At the moment, this just adds Foundation style pagination. I may add more at a later date.
+Create easy pagination and form elements based on the [Zurb Foundation](http://foundation.zurb.com) framework.
 
 ##Installation
 
 Add to composer.json:
 
-`"dansmith/laravel5-foundation": "0.1.*"`
+`"dansmith/laravel5-foundation": "0.2.*"`
 
-Add the service provider to the providers array in your config/app.php file:
+This package comes with two service providers which should be added to the providers array in your config/app.php file:
 
 `'Foundation\FoundationServiceProvider',`
+`'Foundation\FoundationFormServiceProvider',`
 
 Optionally, add the facade class to the aliases array in the same file:
 
@@ -30,5 +30,24 @@ Call the corresponding method on the facade depending on whether your collection
     {!! $users->render(Foundation::paginate($users)) !!}
 </div>
 ```
+
+## Forms
+
+The form component extends the Illuminate Form Builder package, which means all of the regular methods are available as normal.
+
+```
+{!! Form::text('title', $page->title) !!}
+```
+
+The extension allows the creation of inputs which are nested inside of their labels, which removes the need to connect them using the for attribute.
+The nested inputs follow the same naming conventions as the base inputs, with a prefix of 'wrapped'.
+The only difference being that the label text is now specified as the second parameter.
+
+```
+{!! Form::wrappedText('title', 'Title', $page->title) !!}
+```
+
+If there are any validation errors which match the name of the specified input, an error class will be applied to both
+the label and input elements and the first error found will be inserted into a small element.
 
 
