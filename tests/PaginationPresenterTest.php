@@ -1,5 +1,6 @@
 <?php
 
+use Foundation\Pagination\FoundationFivePresenter;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class PaginationPresenterTest extends PHPUnit_Framework_TestCase {
@@ -12,7 +13,7 @@ class PaginationPresenterTest extends PHPUnit_Framework_TestCase {
         $this->records   = range(1, 30);
         $options         = ['path' => 'http://website.com', 'pageName' => 'foo'];
         $this->paginator = new LengthAwarePaginator($this->records, 30, 10, 1, $options);
-        $this->presenter = new \Foundation\Pagination\FoundationFivePresenter($this->paginator);
+        $this->presenter = new FoundationFivePresenter($this->paginator);
     }
 
     public function testOutput()
