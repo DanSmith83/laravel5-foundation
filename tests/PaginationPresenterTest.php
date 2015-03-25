@@ -2,8 +2,7 @@
 
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class PaginationPresenterTest extends PHPUnit_Framework_TestCase
-{
+class PaginationPresenterTest extends PHPUnit_Framework_TestCase {
 
     /**
      * Setup the test environment.
@@ -24,5 +23,3 @@ class PaginationPresenterTest extends PHPUnit_Framework_TestCase
         );
     }
 }
-
-?>
