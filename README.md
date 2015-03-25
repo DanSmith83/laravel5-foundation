@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/DanSmith83/laravel5-foundation.svg?branch=master)](https://travis-ci.org/DanSmith83/laravel5-foundation)
+[![Build Status](https://travis-ci.org/DanSmith83/laravel5-foundation.svg)](https://travis-ci.org/DanSmith83/laravel5-foundation)
 
 # laravel5-foundation
 
