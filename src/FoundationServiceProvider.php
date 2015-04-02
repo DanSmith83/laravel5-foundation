@@ -16,6 +16,10 @@ class FoundationServiceProvider extends HtmlServiceProvider {
     public function boot()
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'foundation');
+
+        $this->publishes([
+            __DIR__.'/../resources/views' => base_path('resources/views/vendor/foundation'),
+        ]);
     }
 
     public function register()
