@@ -1,0 +1,1 @@
+<h4>Page {{ $paginate->currentPage() }} of {{ $paginate->lastPage() }} </h4>
