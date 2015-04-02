@@ -13,6 +13,11 @@ class FoundationServiceProvider extends HtmlServiceProvider {
      */
     protected $defer = true;
 
+    public function boot()
+    {
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'foundation');
+    }
+
     public function register()
     {
         parent::register();
