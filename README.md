@@ -8,7 +8,7 @@ Create easy pagination and form elements based on the [Zurb Foundation](http://f
 
 Add to composer.json:
 
-`"dansmith/laravel5-foundation": "0.2.*"`
+`"dansmith/laravel5-foundation": "0.3.*"`
 
 This package comes with two service providers which should be added to the providers array in your config/app.php file:
 
