@@ -7,7 +7,8 @@ use Collective\Html\FormBuilder;
 use Collective\Html\HtmlBuilder;
 use Illuminate\Support\ViewErrorBag;
 
-class FoundationFiveFormBuilder extends FormBuilder {
+class FoundationFiveFormBuilder extends FormBuilder
+{
 
 
     /**
@@ -181,21 +182,39 @@ class FoundationFiveFormBuilder extends FormBuilder {
     {
         $months = [];
 
-        foreach (range(1, 12) as $month)
-        {
+        foreach (range(1, 12) as $month) {
             $months[$month] = strftime($format, mktime(0, 0, 0, $month, 1));
         }
 
         return $this->foundationSelect($name, $labelText, $months, $selected, $options);
     }
 
+
+    /**
+     * @param $type
+     * @param $name
+     * @param $labelText
+     * @param null $value
+     * @param array $options
+     * @return string
+     */
+    public function wrappedInput($type, $name, $labelText, $value = null, $options = [])
+    {
+        return $this->wrapWithLabel(
+            $name,
+            $labelText,
+            $options,
+            parent::input($type, $name, $value, $this->appendErrors($name, $options))
+        );
+    }
+
     /**
      * Create a form input field.
      *
-     * @param  string  $type
-     * @param  string  $name
-     * @param  string  $value
-     * @param  array   $options
+     * @param  string $type
+     * @param  string $name
+     * @param  string $value
+     * @param  array $options
      * @return string
      */
     public function input($type, $name, $value = null, $options = [])
@@ -206,9 +225,9 @@ class FoundationFiveFormBuilder extends FormBuilder {
     /**
      * Create a textarea input field.
      *
-     * @param  string  $name
-     * @param  string  $value
-     * @param  array   $options
+     * @param  string $name
+     * @param  string $value
+     * @param  array $options
      * @return string
      */
     public function textarea($name, $value = null, $options = [])
@@ -219,10 +238,10 @@ class FoundationFiveFormBuilder extends FormBuilder {
     /**
      * Create a select box field.
      *
-     * @param  string  $name
-     * @param  array   $list
-     * @param  string  $selected
-     * @param  array   $options
+     * @param  string $name
+     * @param  array $list
+     * @param  string $selected
+     * @param  array $options
      * @return string
      */
     public function select($name, $list = [], $selected = null, $options = [])
@@ -233,9 +252,9 @@ class FoundationFiveFormBuilder extends FormBuilder {
     /**
      * Create a form label element.
      *
-     * @param  string  $name
-     * @param  string  $value
-     * @param  array   $options
+     * @param  string $name
+     * @param  string $value
+     * @param  array $options
      * @return string
      */
     public function label($name, $value = null, $options = [])
@@ -254,7 +273,7 @@ class FoundationFiveFormBuilder extends FormBuilder {
 
         $options = $this->html->attributes($options);
 
-        return '<label'.$options.'>'.$value;
+        return '<label' . $options . '>' . $value;
     }
 
     /**
@@ -276,14 +295,13 @@ class FoundationFiveFormBuilder extends FormBuilder {
     {
         $options = array_except($options, ['id']);
 
-        if ($this->errors->has($name))
-        {
-            return $this->startLabel($labelText, $this->appendErrors($name, $options)).
-                   $html.$this->endLabel().
+        if ($this->errors->has($name)) {
+            return $this->startLabel($labelText, $this->appendErrors($name, $options)) .
+                   $html . $this->endLabel() .
                    $this->smallError($name);
         }
 
-        return $this->startLabel($labelText, $this->appendErrors($name, $options)).$html.$this->endLabel();
+        return $this->startLabel($labelText, $this->appendErrors($name, $options)) . $html . $this->endLabel();
     }
 
     /**
@@ -293,9 +311,10 @@ class FoundationFiveFormBuilder extends FormBuilder {
      */
     private function appendErrors($name, $options)
     {
-        if ($this->errors->has($name))
-        {
-            $options['class'] = isset($options['class']) ? $options['class'].' error' : 'error';
+        if ($this->errors->has($name)) {
+            $options['class'] = isset($options['class'])
+                ? $options['class'] . ' error'
+                : 'error';
         }
 
         return $options;

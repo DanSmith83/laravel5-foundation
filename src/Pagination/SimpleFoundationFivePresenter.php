@@ -3,12 +3,13 @@
 use Illuminate\Pagination\BootstrapThreePresenter;
 use Illuminate\Contracts\Pagination\Paginator as PaginatorContract;
 
-class SimpleFoundationFivePresenter extends BootstrapThreePresenter {
+class SimpleFoundationFivePresenter extends BootstrapThreePresenter
+{
 
     /**
      * Create a simple Foundation presenter.
      *
-     * @param  \Illuminate\Contracts\Pagination\Paginator  $paginator
+     * @param  \Illuminate\Contracts\Pagination\Paginator $paginator
      * @return void
      */
     public function __construct(PaginatorContract $paginator)
@@ -19,12 +20,12 @@ class SimpleFoundationFivePresenter extends BootstrapThreePresenter {
     /**
      * Get HTML wrapper for disabled text.
      *
-     * @param  string  $text
+     * @param  string $text
      * @return string
      */
     protected function getDisabledTextWrapper($text)
     {
-        return '<li class="arrow unavailable"><a href="#">'.$text.'</a></li>';
+        return '<li class="arrow unavailable"><a href="#">' . $text . '</a></li>';
     }
 
 
@@ -35,8 +36,7 @@ class SimpleFoundationFivePresenter extends BootstrapThreePresenter {
      */
     public function render()
     {
-        if ($this->hasPages())
-        {
+        if ($this->hasPages()) {
             return sprintf(
                 '<ul class="pagination">%s %s</ul>',
                 $this->getPreviousButton(),
@@ -50,15 +50,14 @@ class SimpleFoundationFivePresenter extends BootstrapThreePresenter {
     /**
      * Get HTML wrapper for a page link.
      *
-     * @param  string  $url
-     * @param  int  $page
-     * @param  string|null  $rel
+     * @param  string $url
+     * @param  int $page
+     * @param  string|null $rel
      * @return string
      */
     protected function getPageLinkWrapper($url, $page, $rel = null)
     {
-        if ($page == '&laquo;')
-        {
+        if ($page == '&laquo;') {
             return $this->getPreviousPageWrapper($url, $page, $rel);
         }
 
@@ -68,30 +67,34 @@ class SimpleFoundationFivePresenter extends BootstrapThreePresenter {
     /**
      * Get HTML wrapper for an available page link.
      *
-     * @param  string  $url
-     * @param  int  $page
-     * @param  string|null  $rel
+     * @param  string $url
+     * @param  int $page
+     * @param  string|null $rel
      * @return string
      */
     protected function getPreviousPageWrapper($url, $page, $rel = null)
     {
-        $rel = is_null($rel) ? '' : ' rel="'.$rel.'"';
+        $rel = is_null($rel)
+            ? ''
+            : ' rel="' . $rel . '"';
 
-        return '<li class="left"><a href="'.$url.'"'.$rel.'>'.$page.'</a></li>';
+        return '<li class="left"><a href="' . $url . '"' . $rel . '>' . $page . '</a></li>';
     }
 
     /**
      * Get HTML wrapper for an available page link.
      *
-     * @param  string  $url
-     * @param  int  $page
-     * @param  string|null  $rel
+     * @param  string $url
+     * @param  int $page
+     * @param  string|null $rel
      * @return string
      */
     protected function getNextPageWrapper($url, $page, $rel = null)
     {
-        $rel = is_null($rel) ? '' : ' rel="'.$rel.'"';
+        $rel = is_null($rel)
+            ? ''
+            : ' rel="' . $rel . '"';
 
-        return '<li class="right"><a href="'.$url.'"'.$rel.'>'.$page.'</a></li>';
+        return '<li class="right"><a href="' . $url . '"' . $rel . '>' . $page . '</a></li>';
     }
 }

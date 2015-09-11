@@ -161,4 +161,18 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase {
 
         $this->assertEquals('<label class="error">Test:<input class="error error" name="test" type="text"></label><small class="error">Generic error message</small>', $input);
     }
+
+    public function testWrappedInput()
+    {
+        $emptyInput          = $this->formBuilder->wrappedInput('range', 'test', 'Test:');
+        $filledInput         = $this->formBuilder->wrappedInput('range', 'test', 'Test:', 'Testing');
+        $inputWithAttributes = $this->formBuilder->wrappedInput('range', 'test', 'Test:', 'Testing', $this->attributes);
+
+        $this->assertEquals('<label>Test:<input name="test" type="range"></label>', $emptyInput);
+        $this->assertEquals('<label>Test:<input name="test" type="range" value="Testing"></label>', $filledInput);
+        $this->assertEquals(
+            '<label>Test:<input id="test-input" name="test" type="range" value="Testing"></label>',
+            $inputWithAttributes
+        );
+    }
 }
