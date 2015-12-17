@@ -19,7 +19,7 @@ class SimplePaginationPresenterTest extends PHPUnit_Framework_TestCase {
     public function testOutput()
     {
         $this->assertEquals(
-            '<ul class="pagination"><li class="arrow unavailable"><a href="#">&laquo;</a></li> <li class="right"><a href="http://website.com/?foo=2" rel="next">&raquo;</a></li></ul>',
+            '<ul class="pagination"><li class="arrow unavailable"><a href="#">&laquo;</a></li> <li class="right"><a href="http://website.com?foo=2" rel="next">&raquo;</a></li></ul>',
             $this->paginator->render($this->presenter)
         );
     }
