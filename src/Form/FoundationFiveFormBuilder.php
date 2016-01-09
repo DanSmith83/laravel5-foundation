@@ -6,6 +6,7 @@ use Illuminate\Contracts\Routing\UrlGenerator;
 use Collective\Html\FormBuilder;
 use Collective\Html\HtmlBuilder;
 use Illuminate\Support\ViewErrorBag;
+use Illuminate\View\Factory as ViewFactory;
 
 class FoundationFiveFormBuilder extends FormBuilder
 {
@@ -17,9 +18,9 @@ class FoundationFiveFormBuilder extends FormBuilder
      * @param string $csrfToken
      * @param ViewErrorBag $errors
      */
-    public function __construct(HtmlBuilder $html, UrlGenerator $url, $csrfToken, ViewErrorBag $errors)
+    public function __construct(HtmlBuilder $html, UrlGenerator $url, ViewFactory $factory, $csrfToken, ViewErrorBag $errors)
     {
-        parent::__construct($html, $url, $csrfToken);
+        parent::__construct($html, $url, $factory, $csrfToken);
 
         $this->errors = $errors;
     }

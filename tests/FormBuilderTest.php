@@ -7,6 +7,9 @@ use Illuminate\Routing\UrlGenerator;
 use Illuminate\Routing\RouteCollection;
 use Illuminate\Support\ViewErrorBag;
 use Illuminate\Support\MessageBag;
+use Illuminate\View\Engines\EngineResolver;
+use Illuminate\View\Factory as ViewFactory;
+use Illuminate\View\FileViewFinder;
 
 class FormBuilderTest extends PHPUnit_Framework_TestCase {
 
@@ -16,8 +19,12 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
         $this->urlGenerator = new UrlGenerator(new RouteCollection, Request::create('/foo', 'GET'));
-        $this->htmlBuilder  = new HtmlBuilder($this->urlGenerator);
-        $this->formBuilder  = new FoundationFiveFormBuilder($this->htmlBuilder, $this->urlGenerator, 'abc',
+        $this->viewFactory = new ViewFactory(
+            new EngineResolver,
+            new FileViewFinder($this->getMock('Illuminate\Filesystem\Filesystem'), []), $this->getMock('Illuminate\Events\Dispatcher')
+        );
+        $this->htmlBuilder  = new HtmlBuilder($this->urlGenerator, $this->viewFactory);
+        $this->formBuilder  = new FoundationFiveFormBuilder($this->htmlBuilder, $this->urlGenerator, $this->viewFactory, 'abc',
             new ViewErrorBag);
         $this->attributes   = ['id' => 'test-input'];
     }
@@ -156,7 +163,7 @@ class FormBuilderTest extends PHPUnit_Framework_TestCase {
         $viewErrorBag = new ViewErrorBag;
         $viewErrorBag->put('default', new MessageBag(['test' => ['Generic error message']]));
 
-        $formBuilder = new FoundationFiveFormBuilder($this->htmlBuilder, $this->urlGenerator, 'abc', $viewErrorBag);
+        $formBuilder = new FoundationFiveFormBuilder($this->htmlBuilder, $this->urlGenerator, $this->viewFactory, 'abc', $viewErrorBag);
         $input       = $formBuilder->wrappedText('test', 'Test:');
 
         $this->assertEquals('<label class="error">Test:<input class="error error" name="test" type="text"></label><small class="error">Generic error message</small>', $input);
