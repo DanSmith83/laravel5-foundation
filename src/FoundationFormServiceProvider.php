@@ -22,11 +22,12 @@ class FoundationFormServiceProvider extends HtmlServiceProvider {
      */
     protected function registerFormBuilder()
     {
-        $this->app->bindShared('form', function($app)
+        $this->app->singleton('form', function($app)
         {
             $form = new FoundationFiveFormBuilder(
                 $app['html'],
                 $app['url'],
+                $app->make('Illuminate\View\Factory'),
                 $app['session.store']->getToken(),
                 $app['session.store']->get('errors') ?: new ViewErrorBag
             );
